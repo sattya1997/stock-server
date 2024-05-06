@@ -11,6 +11,28 @@ var cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+app.get("/mc", async (req, res) => {
+  var data = [];
+  try {
+    const id = req.query.id;
+    const result = await axios.get(
+      `https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=&type=0&ind_id=${id}`
+    );
+
+    res.send(result.data.item);
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  }
+});
+
 app.get("/get", async (req, res) => {
   var tickers = [];
   var data = [];
