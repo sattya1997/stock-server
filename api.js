@@ -34,13 +34,13 @@ app.get("/mc", async (req, res) => {
 });
 
 app.get("/searchDetail", async (req, res) => {
-  var data = [];
   try {
     const id = req.query.id;
     const result = await axios.get(
       `https://api.tickertape.in/search?text=${id}&types=stock,index,etf,mutualfund,space,profile,smallcase,gold&pageNumber=0`
     );
-
+    console.log(result);
+    console.log(result.data);
     res.send(result.data);
   } catch (error) {
     if (error.response) {
