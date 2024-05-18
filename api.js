@@ -33,6 +33,28 @@ app.get("/mc", async (req, res) => {
   }
 });
 
+app.get("/searchDetail", async (req, res) => {
+  var data = [];
+  try {
+    const id = req.query.id;
+    const result = await axios.get(
+      `https://api.tickertape.in/search?text=${id}&types=stock,index,etf,mutualfund,space,profile,smallcase,gold&pageNumber=0`
+    );
+
+    res.send(result.data);
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  }
+});
+
 app.get("/mmi", async (req, res) => {
   try {
     const result = await axios.get(
