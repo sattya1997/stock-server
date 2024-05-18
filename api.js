@@ -33,6 +33,26 @@ app.get("/mc", async (req, res) => {
   }
 });
 
+pp.get("/mmi", async (req, res) => {
+  try {
+    const result = await axios.get(
+      "https://api.tickertape.in/mmi/now"
+    );
+
+    res.send(result.data);
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  }
+});
+
 app.get("/get", async (req, res) => {
   var tickers = [];
   var data = [];
