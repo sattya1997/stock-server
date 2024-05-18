@@ -33,7 +33,7 @@ app.get("/mc", async (req, res) => {
   }
 });
 
-pp.get("/mmi", async (req, res) => {
+app.get("/mmi", async (req, res) => {
   try {
     const result = await axios.get(
       "https://api.tickertape.in/mmi/now"
