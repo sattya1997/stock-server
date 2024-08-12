@@ -11,6 +11,22 @@ var cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+app.get("/ping", async (req, res) => {
+  try {
+    res.send("pong");
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  }
+});
+
 app.get("/mc", async (req, res) => {
   var data = [];
   try {
