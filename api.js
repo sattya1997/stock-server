@@ -13,7 +13,8 @@ app.use(express.json());
 
 app.get("/ping", async (req, res) => {
   try {
-    res.send("pong");
+    const result = await axios.get("https://ping-cron-job.onrender.com");
+    res.send(result);
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
